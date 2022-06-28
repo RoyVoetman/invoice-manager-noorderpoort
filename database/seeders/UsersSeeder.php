@@ -18,15 +18,18 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        User::updateOrCreate([
-            'id' => 1,
-            'name' => 'Roy Voetman',
-            'email' => 'royvoetman@outlook.com',
-            'email_verified_at' => null,
-            'password' => Hash::make('secret'),
-            'remember_token' => null,
-            'role_id' => Role::OWNER,
-            'address_id' => null,
-        ]);
+        User::updateOrCreate(
+            [
+                'id' => 1,
+                'name' => 'Roy Voetman',
+                'email' => 'royvoetman@outlook.com',
+                'email_verified_at' => null,
+                'remember_token' => null,
+                'role_id' => Role::OWNER,
+            ],
+            [
+                'password' => Hash::make('secret'),
+            ]
+        );
     }
 }

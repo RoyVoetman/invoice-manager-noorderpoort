@@ -19,6 +19,7 @@ return new class extends Migration
             $table->id();
             $table->integer('invoice_number')->unsigned()->unique();
             $table->string('attention_to');
+            $table->string('description');
             $table->dateTime('invoice_date');
             $table->dateTime('expiration_date');
 

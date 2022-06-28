@@ -18,15 +18,18 @@ class DebtorsSeeder extends Seeder
     public function run()
     {
         for ($i = 0; $i < 5; $i++) {
-            User::updateOrCreate([
-                'name' => "Company " . $i,
-                'email' => "info@comapny" . $i . ".com",
-                'email_verified_at' => null,
-                'password' => Hash::make('secret'),
-                'remember_token' => null,
-                'role_id' => Role::DEBTOR,
-                'address_id' => null,
-            ]);
+            User::updateOrCreate(
+                [
+                    'name' => "Company " . $i,
+                    'email' => "info@company" . $i . ".com",
+                    'email_verified_at' => null,
+                    'remember_token' => null,
+                    'role_id' => Role::DEBTOR
+                ],
+                [
+                    'password' => Hash::make('secret')
+                ]
+            );
         }
     }
 }
