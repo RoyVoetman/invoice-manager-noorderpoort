@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     use HasFactory;
+
+    const OWNER = 1;
+    const DEBTOR = 2;
 }
