@@ -13,7 +13,11 @@ class DashboardController extends Controller
      */
     public function view(): Renderable
     {
+        $invoices = Invoice::query()
+            ->orderBy('invoice_number')
+            ->paginate(10);
+
         return view('dashboard')
-            ->with('invoices', Invoice::all());
+            ->with('invoices', $invoices);
     }
 }

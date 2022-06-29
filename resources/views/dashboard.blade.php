@@ -28,13 +28,22 @@
                                     <td class="py-4">{{ $invoice->invoice_date->format('d-m-Y') }}</td>
                                     <td class="py-4">{{ $invoice->expiration_date->format('d-m-Y') }}</td>
                                     <td class="py-4">{{ $invoice->created_at->format('d-m-Y') }}</td>
-                                    <td class="py-4"></td>
+                                    <td class="py-4">
+                                        <x-link href="#">
+                                            Edit
+                                        </x-link>
+                                        <x-link href="#">
+                                            Delete
+                                        </x-link>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
+
+            {{ $invoices->links() }}
         </div>
     </div>
 </x-app-layout>
