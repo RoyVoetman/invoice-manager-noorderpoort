@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,5 +27,17 @@ class Address extends Model
     public function invoices(): HasMany
     {
         return $this->hasMany(Invoice::class, 'address_id', 'id');
+    }
+
+    /**
+     * @return Attribute
+     */
+    protected function address(): Attribute
+    {
+        return Attribute::make(function ($value, $attributes) {
+            return $attributes['street'] .
+                ' ' . $attributes['house_number']
+                . $attributes['house_number_suffix'];
+        });
     }
 }

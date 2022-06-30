@@ -12,13 +12,44 @@
                     <form action="{{ route('invoices.store') }}" method="POST">
                         @csrf
 
-                        <x-label for="attention_to" :value="__('Attention to')"></x-label>
+                        <x-form-field
+                            field-name="attention_to"
+                            value="{{ __('Attention to') }}"
+                            placeholder="{{ __('Mr. Voetman') }}"
+                            type="text"
+                        ></x-form-field>
 
-                        <x-input id="attention_to" class="block mt-1 w-full"
-                                 type="text"
-                                 name="attention_to"
-                                 placeholder="{{ __('Mr. Voetman') }}"
-                                 required></x-input>
+                        <x-form-field
+                            field-name="description"
+                            value="{{ __('Description') }}"
+                            type="text"
+                        ></x-form-field>
+
+                        <x-form-field
+                            field-name="invoice_date"
+                            value="{{ __('Invoice date') }}"
+                            type="date"
+                        ></x-form-field>
+
+                        <x-form-field
+                            field-name="expiration_date"
+                            value="{{ __('Expiration date') }}"
+                            type="date"
+                        ></x-form-field>
+
+                        <x-form-select
+                            field-name="debtor_id"
+                            value="Debtors"
+                            :options="$debtors"
+                        >
+                        </x-form-select>
+
+                        <x-form-select
+                            field-name="address_id"
+                            value="Addresses"
+                            :options="$addresses"
+                        >
+                        </x-form-select>
 
                         <x-button class="mt-3">
                             {{ __('Submit') }}
