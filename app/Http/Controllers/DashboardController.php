@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

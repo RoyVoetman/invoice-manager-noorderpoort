@@ -2,6 +2,10 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
+
+            <x-link href="{{ route('invoices.create') }}" class="float-right">
+                Create
+            </x-link>
         </h2>
     </x-slot>
 
