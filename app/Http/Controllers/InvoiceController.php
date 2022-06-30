@@ -14,4 +14,13 @@ class InvoiceController extends Controller
     {
         return view('invoices.create');
     }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

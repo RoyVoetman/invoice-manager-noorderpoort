@@ -19,11 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'view'])
-    ->middleware(['auth'])
-    ->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'view'])
+        ->name('dashboard');
 
-Route::get('/invoices/create', [InvoiceController::class, 'create'])
-    ->name('invoices.create');
+    Route::get('/invoices/create', [InvoiceController::class, 'create'])
+        ->name('invoices.create');
+
+    Route::post('/invoices', [InvoiceController::class, 'store'])
+        ->name('invoices.store');
+});
 
 require __DIR__.'/auth.php';
