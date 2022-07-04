@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\Invoice;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class InvoiceController extends Controller
 {
@@ -32,10 +35,22 @@ class InvoiceController extends Controller
 
     /**
      * @param Request $request
-     * @return void
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        dd($request->all());
+        $formData = $request->all();
+
+        Invoice::create([
+            "invoice_number" => Invoice::getNextInvoiceNumber(),
+            "attention_to" => $formData['attention_to'],
+            "description" => $formData['description'],
+            "invoice_date" => Carbon::createFromFormat("Y-m-d", $formData['invoice_date']),
+            "expiration_date" => Carbon::createFromFormat("Y-m-d", $formData['expiration_date']),
+            "debtor_id" => $formData['debtor_id'],
+            "address_id" => $formData['address_id']
+        ]);
+
+        return redirect()->route('dashboard');
     }
 }

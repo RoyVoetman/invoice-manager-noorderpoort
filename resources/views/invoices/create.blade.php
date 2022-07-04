@@ -51,6 +51,36 @@
                         >
                         </x-form-select>
 
+                        <div class="py-4">
+                            <x-label value="Invoice lines"></x-label>
+
+                            @for($i = 0; $i < 4; $i++)
+                                <div class="flex flex-row">
+                                    <div class="basis-2/3">
+                                        <x-form-field
+                                            field-name="description"
+                                            value="{{ __('Description') }}"
+                                            type="text"
+                                        ></x-form-field>
+                                    </div>
+                                    <div class="basis-1/6">
+                                        <x-form-field
+                                            field-name="price"
+                                            value="{{ __('Price') }}"
+                                            type="text"
+                                        ></x-form-field>
+                                    </div>
+                                    <div class="basis-1/6">
+                                        <x-form-field
+                                            field-name="VAT_percentage"
+                                            value="{{ __('VAT percentage') }}"
+                                            type="text"
+                                        ></x-form-field>
+                                    </div>
+                                </div>
+                            @endfor
+                        </div>
+
                         <x-button class="mt-3">
                             {{ __('Submit') }}
                         </x-button>

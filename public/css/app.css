@@ -755,6 +755,12 @@ select {
 .mt-2 {
   margin-top: 0.5rem;
 }
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -782,14 +788,8 @@ select {
 .mb-4 {
   margin-bottom: 1rem;
 }
-.mt-1 {
-  margin-top: 0.25rem;
-}
 .-mr-2 {
   margin-right: -0.5rem;
-}
-.mt-3 {
-  margin-top: 0.75rem;
 }
 .mt-6 {
   margin-top: 1.5rem;
@@ -875,6 +875,12 @@ select {
 .shrink-0 {
   flex-shrink: 0;
 }
+.basis-2\/3 {
+  flex-basis: 66.666667%;
+}
+.basis-1\/6 {
+  flex-basis: 16.666667%;
+}
 .table-fixed {
   table-layout: fixed;
 }
@@ -914,6 +920,9 @@ select {
 }
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+.flex-row {
+  flex-direction: row;
 }
 .flex-col {
   flex-direction: column;

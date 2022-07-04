@@ -23,6 +23,19 @@ class Invoice extends Model
     ];
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'invoice_number',
+        'attention_to',
+        'description',
+        'invoice_date',
+        'expiration_date',
+        'debtor_id',
+        'address_id'
+    ];
+
+    /**
      * @return HasMany
      */
     public function lines(): HasMany
@@ -44,5 +57,15 @@ class Invoice extends Model
     public function debtor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'debtor_id', 'id');
+    }
+
+    /**
+     * @return int
+     */
+    public static function getNextInvoiceNumber(): int
+    {
+        $max = Invoice::query()->max('invoice_number') ?? 999;
+
+        return $max + 1;
     }
 }
