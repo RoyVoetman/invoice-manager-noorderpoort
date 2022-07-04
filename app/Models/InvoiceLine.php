@@ -11,6 +11,16 @@ class InvoiceLine extends Model
     use HasFactory;
 
     /**
+     * @var string[]
+     */
+    protected $fillable = [
+        'description',
+        'price_exclusive',
+        'VAT_percentage',
+        'invoice_id'
+    ];
+
+    /**
      * @return BelongsTo
      */
     public function invoice(): BelongsTo

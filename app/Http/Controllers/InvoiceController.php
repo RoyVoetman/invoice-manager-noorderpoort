@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Models\Invoice;
+use App\Models\InvoiceLine;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
@@ -41,7 +42,7 @@ class InvoiceController extends Controller
     {
         $formData = $request->all();
 
-        Invoice::create([
+        $invoice = Invoice::create([
             "invoice_number" => Invoice::getNextInvoiceNumber(),
             "attention_to" => $formData['attention_to'],
             "description" => $formData['description'],
@@ -50,6 +51,15 @@ class InvoiceController extends Controller
             "debtor_id" => $formData['debtor_id'],
             "address_id" => $formData['address_id']
         ]);
+
+        for ($i = 0; $i < count($formData['invoice_line_description']); $i++) {
+            InvoiceLine::create([
+                "description" => $formData['invoice_line_description'][$i],
+                "price_exclusive" => $formData['price'][$i],
+                "VAT_percentage" => $formData['VAT_percentage'][$i],
+                "invoice_id" => $invoice->id
+            ]);
+        }
 
         return redirect()->route('dashboard');
     }

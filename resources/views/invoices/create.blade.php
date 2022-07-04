@@ -58,21 +58,21 @@
                                 <div class="flex flex-row">
                                     <div class="basis-2/3">
                                         <x-form-field
-                                            field-name="description"
+                                            field-name="invoice_line_description[{{ $i }}]"
                                             value="{{ __('Description') }}"
                                             type="text"
                                         ></x-form-field>
                                     </div>
                                     <div class="basis-1/6">
                                         <x-form-field
-                                            field-name="price"
+                                            field-name="price[{{ $i }}]"
                                             value="{{ __('Price') }}"
                                             type="text"
                                         ></x-form-field>
                                     </div>
                                     <div class="basis-1/6">
                                         <x-form-field
-                                            field-name="VAT_percentage"
+                                            field-name="VAT_percentage[{{ $i }}]"
                                             value="{{ __('VAT percentage') }}"
                                             type="text"
                                         ></x-form-field>
