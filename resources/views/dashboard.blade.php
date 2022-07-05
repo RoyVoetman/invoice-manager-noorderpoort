@@ -36,9 +36,15 @@
                                         <x-link href="#">
                                             Edit
                                         </x-link>
-                                        <x-link href="#">
-                                            Delete
-                                        </x-link>
+
+                                        <form action="{{ route('invoices.destroy', ['invoice' => $invoice]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <x-button type="submit">
+                                                Delete
+                                            </x-button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

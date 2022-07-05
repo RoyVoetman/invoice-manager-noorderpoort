@@ -63,4 +63,15 @@ class InvoiceController extends Controller
 
         return redirect()->route('dashboard');
     }
+
+    /**
+     * @param Invoice $invoice
+     * @return RedirectResponse
+     */
+    public function destroy(Invoice $invoice): RedirectResponse
+    {
+        $invoice->delete();
+
+        return redirect()->route('dashboard');
+    }
 }
