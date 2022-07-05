@@ -70,6 +70,7 @@ class InvoiceController extends Controller
      */
     public function destroy(Invoice $invoice): RedirectResponse
     {
+        $invoice->lines()->delete();
         $invoice->delete();
 
         return redirect()->route('dashboard');
