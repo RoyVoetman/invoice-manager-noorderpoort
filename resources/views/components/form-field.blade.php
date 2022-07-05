@@ -1,6 +1,6 @@
-@props(['field-name' => '', 'value' => ''])
+@props(['field-name' => '', 'label' => ''])
 
-<x-label for="{{ $fieldName }}" value="{{ $value }}" class="mt-3"></x-label>
+<x-label for="{{ $fieldName }}" value="{{ $label }}" class="mt-3"></x-label>
 
 <x-input {{ $attributes }}
          id="{{ $fieldName }}"

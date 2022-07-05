@@ -31,6 +31,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])
         ->name('invoices.destroy');
+
+    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])
+        ->name('invoices.edit');
+
+    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])
+        ->name('invoices.update');
 });
 
 require __DIR__.'/auth.php';

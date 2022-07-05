@@ -33,11 +33,11 @@
                                     <td class="py-4">{{ $invoice->expiration_date->format('d-m-Y') }}</td>
                                     <td class="py-4">{{ $invoice->created_at->format('d-m-Y') }}</td>
                                     <td class="py-4">
-                                        <x-link href="#">
+                                        <x-link href="{{ route('invoices.edit', ['invoice' => $invoice]) }}">
                                             Edit
                                         </x-link>
 
-                                        <form action="{{ route('invoices.destroy', ['invoice' => $invoice]) }}" method="POST">
+                                        <form action="{{ route('invoices.destroy', ['invoice' => $invoice]) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
 

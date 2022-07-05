@@ -76,4 +76,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id', 'id');
     }
+
+    /**
+     * @return array
+     */
+    public static function getDebtorsDropdown(): array
+    {
+        return User::query()
+            ->where('role_id', Role::DEBTOR)
+            ->pluck('name', 'id')
+            ->toArray();
+    }
 }

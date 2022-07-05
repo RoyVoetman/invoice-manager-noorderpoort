@@ -40,4 +40,15 @@ class Address extends Model
                 . $attributes['house_number_suffix'];
         });
     }
+
+    /**
+     * @return array
+     */
+    public static function getAddressesDropdown(): array
+    {
+        return Address::query()
+            ->get()
+            ->pluck('address', 'id')
+            ->toArray();
+    }
 }

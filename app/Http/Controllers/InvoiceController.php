@@ -11,6 +11,7 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 class InvoiceController extends Controller
 {
@@ -19,19 +20,9 @@ class InvoiceController extends Controller
      */
     public function create(): Renderable
     {
-        $debtors = User::query()
-            ->where('role_id', Role::DEBTOR)
-            ->pluck('name', 'id')
-            ->toArray();
-
-        $addresses = Address::query()
-            ->get()
-            ->pluck('address', 'id')
-            ->toArray();
-
         return view('invoices.create')
-            ->with('debtors', $debtors)
-            ->with('addresses', $addresses);
+            ->with('debtors', User::getDebtorsDropdown())
+            ->with('addresses', Address::getAddressesDropdown());
     }
 
     /**
@@ -72,6 +63,50 @@ class InvoiceController extends Controller
     {
         $invoice->lines()->delete();
         $invoice->delete();
+
+        return redirect()->route('dashboard');
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return Renderable
+     */
+    public function edit(Invoice $invoice): Renderable
+    {
+        return view('invoices.edit')
+            ->with('invoice', $invoice)
+            ->with('debtors', User::getDebtorsDropdown())
+            ->with('addresses', Address::getAddressesDropdown());
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function update(Invoice $invoice, Request $request): RedirectResponse
+    {
+        $formData = $request->all();
+
+        $invoice->update([
+            "attention_to" => $formData['attention_to'],
+            "description" => $formData['description'],
+            "invoice_date" => Carbon::createFromFormat("Y-m-d", $formData['invoice_date']),
+            "expiration_date" => Carbon::createFromFormat("Y-m-d", $formData['expiration_date']),
+            "debtor_id" => $formData['debtor_id'],
+            "address_id" => $formData['address_id']
+        ]);
+
+        $invoice->lines()->delete();
+
+        for ($i = 0; $i < count($formData['invoice_line_description']); $i++) {
+            InvoiceLine::create([
+                "description" => $formData['invoice_line_description'][$i],
+                "price_exclusive" => $formData['price'][$i],
+                "VAT_percentage" => $formData['VAT_percentage'][$i],
+                "invoice_id" => $invoice->id
+            ]);
+        }
 
         return redirect()->route('dashboard');
     }

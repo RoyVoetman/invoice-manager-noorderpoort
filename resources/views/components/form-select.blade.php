@@ -1,6 +1,6 @@
-@props(['field-name' => '', 'value' => '', 'options' => []])
+@props(['field-name' => '', 'label' => '', 'options' => [], 'selected' => ''])
 
-<x-label for="{{ $fieldName }}" value="{{ $value }}" class="mt-3"></x-label>
+<x-label for="{{ $fieldName }}" value="{{ $label }}" class="mt-3"></x-label>
 
 <select {{ $attributes }}
         name="{{ $fieldName }}"
@@ -8,6 +8,6 @@
         id="{{ $fieldName }}"
         required>
     @foreach($options as $index => $option)
-        <option value="{{ $index }}">{{ $option }}</option>
+        <option value="{{ $index }}" {{ ($index == $selected ? 'selected' : '') }}>{{ $option }}</option>
     @endforeach
 </select>
