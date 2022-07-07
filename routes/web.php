@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InvoiceController;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,22 +22,10 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'view'])
-        ->name('dashboard');
+        ->name('dashboard')
+        ->can('viewAny', Invoice::class);
 
-    Route::get('/invoices/create', [InvoiceController::class, 'create'])
-        ->name('invoices.create');
-
-    Route::post('/invoices', [InvoiceController::class, 'store'])
-        ->name('invoices.store');
-
-    Route::delete('/invoices/{invoice}', [InvoiceController::class, 'destroy'])
-        ->name('invoices.destroy');
-
-    Route::get('/invoices/{invoice}/edit', [InvoiceController::class, 'edit'])
-        ->name('invoices.edit');
-
-    Route::put('/invoices/{invoice}', [InvoiceController::class, 'update'])
-        ->name('invoices.update');
+    Route::resource('invoices', InvoiceController::class);
 });
 
 require __DIR__.'/auth.php';

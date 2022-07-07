@@ -3,9 +3,11 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
 
-            <x-link href="{{ route('invoices.create') }}" class="float-right">
-                Create
-            </x-link>
+            @can('create', \App\Models\Invoice::class)
+                <x-link href="{{ route('invoices.create') }}" class="float-right">
+                    Create
+                </x-link>
+            @endcan
         </h2>
     </x-slot>
 
@@ -33,18 +35,28 @@
                                     <td class="py-4">{{ $invoice->expiration_date->format('d-m-Y') }}</td>
                                     <td class="py-4">{{ $invoice->created_at->format('d-m-Y') }}</td>
                                     <td class="py-4">
-                                        <x-link href="{{ route('invoices.edit', ['invoice' => $invoice]) }}">
-                                            Edit
-                                        </x-link>
+                                        @can('view', $invoice)
+                                            <x-link href="{{ route('invoices.show', ['invoice' => $invoice]) }}">
+                                                View
+                                            </x-link>
+                                        @endcan
 
-                                        <form action="{{ route('invoices.destroy', ['invoice' => $invoice]) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
+                                        @can('update', $invoice)
+                                            <x-link href="{{ route('invoices.edit', ['invoice' => $invoice]) }}">
+                                                Edit
+                                            </x-link>
+                                        @endcan
 
-                                            <x-button type="submit">
-                                                Delete
-                                            </x-button>
-                                        </form>
+                                        @can('delete', $invoice)
+                                            <form action="{{ route('invoices.destroy', ['invoice' => $invoice]) }}" method="POST" class="inline">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <x-button type="submit">
+                                                    Delete
+                                                </x-button>
+                                            </form>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

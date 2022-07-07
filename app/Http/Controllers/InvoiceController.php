@@ -7,14 +7,37 @@ use App\Models\Invoice;
 use App\Models\InvoiceLine;
 use App\Models\Role;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class InvoiceController extends Controller
 {
+    /**
+     * Create the controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Invoice::class, 'invoice');
+    }
+
+    /**
+     * @param Invoice $invoice
+     * @return Response
+     */
+    public function show(Invoice $invoice): Response
+    {
+        $pdf = Pdf::loadView('pdfs.invoice', ['invoice' => $invoice]);
+
+        return $pdf->stream();
+    }
+
     /**
      * @return Renderable
      */

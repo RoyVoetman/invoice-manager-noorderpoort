@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -13,6 +17,9 @@ class DashboardController extends Controller
     public function view(): Renderable
     {
         $invoices = Invoice::query()
+            ->when(Auth::user()->role_id !== Role::OWNER, function ($query) {
+                $query->where('debtor_id', Auth::id());
+            })
             ->orderBy('invoice_number')
             ->paginate(10);
 

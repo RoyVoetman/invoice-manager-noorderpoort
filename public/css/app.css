@@ -677,6 +677,39 @@ select {
   --tw-backdrop-saturate:  ;
   --tw-backdrop-sepia:  ;
 }
+.container {
+  width: 100%;
+}
+@media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}
 .form-input,.form-textarea,.form-select,.form-multiselect {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -790,6 +823,18 @@ select {
 }
 .-mr-2 {
   margin-right: -0.5rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.ml-auto {
+  margin-left: auto;
+}
+.mr-3 {
+  margin-right: 0.75rem;
 }
 .mt-6 {
   margin-top: 1.5rem;
@@ -1045,6 +1090,12 @@ select {
 .p-2 {
   padding: 0.5rem;
 }
+.p-5 {
+  padding: 1.25rem;
+}
+.p-0 {
+  padding: 0px;
+}
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -1061,6 +1112,10 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1068,10 +1123,6 @@ select {
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
-}
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 .px-6 {
   padding-left: 1.5rem;
@@ -1104,6 +1155,9 @@ select {
 }
 .pb-1 {
   padding-bottom: 0.25rem;
+}
+.pt-0 {
+  padding-top: 0px;
 }
 .pt-6 {
   padding-top: 1.5rem;
